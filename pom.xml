@@ -87,6 +87,19 @@
             <version>${log4j.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>4.9</version>
+        </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <version>3.8.1</version>
+        </dependency>
+
     </dependencies>
 
 </project>

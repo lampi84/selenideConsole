@@ -5,6 +5,7 @@
  */
 package fxml;
 
+import de.palamb.testing.SelenideCommandInterpreter;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -19,9 +20,11 @@ public class SeleniumConsoleController {
     public void readCommand(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
             String currentCommand = this.commandline.getText();
-
-            System.out.println("Current command: " + currentCommand);
             this.commandline.clear();
+            
+            System.out.println("Current command: " + currentCommand);
+            SelenideCommandInterpreter.getInstance().interpretCommand(currentCommand);
+            
 
         }
 
