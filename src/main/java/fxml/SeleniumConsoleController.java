@@ -6,15 +6,30 @@
 package fxml;
 
 import de.palamb.testing.SelenideCommandInterpreter;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-public class SeleniumConsoleController {
+public class SeleniumConsoleController implements Initializable  {
 
     @FXML
     private TextField commandline;
+    
+    @FXML
+    private ListView<String> list_recordedCommands;
+    private ObservableList<String> recordedCommands = FXCollections.observableArrayList();  
+    
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        list_recordedCommands.setItems(recordedCommands);
+    }
 
     @FXML
     public void readCommand(KeyEvent event) {
@@ -23,11 +38,13 @@ public class SeleniumConsoleController {
             this.commandline.clear();
             
             System.out.println("Current command: " + currentCommand);
-            SelenideCommandInterpreter.getInstance().interpretCommand(currentCommand);
-            
-
+            addCommandToLog(currentCommand);
+            SelenideCommandInterpreter.getInstance().interpret(currentCommand, null);
         }
-
     }
-
+    
+    private void addCommandToLog(String command){
+        this.recordedCommands.add(command);
+    }
+    
 }
