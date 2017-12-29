@@ -6,6 +6,7 @@
 package fxml;
 
 import de.palamb.testing.SelenideCommandInterpreter;
+import de.palamb.testing.SelenideLogger;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -36,12 +37,16 @@ public class SeleniumConsoleController implements Initializable  {
     private ListView<String> list_recordedCommands;
     private ObservableList<String> recordedCommands; 
     
+    private SelenideLogger log;
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.recordedCommands = FXCollections.observableArrayList(); 
         list_recordedCommands.setItems(recordedCommands);
-        this.outputLog.setText("Selenide console started");
         this.addListContextMenu();
+        this.log = SelenideLogger.getInstance();
+        this.outputLog.setText("Selenide console started");
+        this.log.setLogArea(outputLog);
     }
     
     private void addListContextMenu(){
@@ -85,7 +90,7 @@ public class SeleniumConsoleController implements Initializable  {
             String currentCommand = this.commandline.getText();
             this.commandline.clear();
             
-            this.writeOutput("Executing: " + currentCommand, "info");
+            this.log.info("Executing: " + currentCommand);
             addCommandToLog(currentCommand);
             SelenideCommandInterpreter.getInstance().interpret(currentCommand, null);
         }
@@ -93,10 +98,6 @@ public class SeleniumConsoleController implements Initializable  {
     
     private void addCommandToLog(String command){
         this.recordedCommands.add(command);
-    }
-    
-    public void writeOutput(String logMessage, String type){
-        this.outputLog.appendText("\n[" + type  + "] " + logMessage);
     }
     
 }

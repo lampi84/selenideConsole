@@ -14,8 +14,11 @@ import org.openqa.selenium.WebElement;
  */
 public class CommandExecuter {
     
+    private static final SelenideLogger log = SelenideLogger.getInstance();
+    
     public static void open(String url){
         Selenide.open(url);
+        log.info("Open " + url);
     }
 
     public static WebElement $(String selector) {
@@ -25,5 +28,7 @@ public class CommandExecuter {
     static void click(WebElement element) {
         element.click();
     }
+    
+    
     
 }
