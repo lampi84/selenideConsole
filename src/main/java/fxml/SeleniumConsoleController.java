@@ -8,7 +8,10 @@ package fxml;
 import de.palamb.testing.SelenideCommandInterpreter;
 import de.palamb.testing.SelenideLogger;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -24,6 +27,8 @@ import javafx.scene.input.ClipboardContent;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import org.apache.commons.lang.StringUtils;
+import org.controlsfx.control.textfield.TextFields;
 
 public class SeleniumConsoleController implements Initializable  {
 
@@ -47,6 +52,21 @@ public class SeleniumConsoleController implements Initializable  {
         this.log = SelenideLogger.getInstance();
         this.outputLog.setText("Selenide console started");
         this.log.setLogArea(outputLog);
+        this.commandline.setText("");
+    }
+    
+    // TODO not working yet
+    private void setupAutoComplete(){
+        String command = this.commandline.getText();
+        
+        String[] commandParts = command.split("\\(|\\)");
+        int commandStage = commandParts.length;
+        
+        if(commandStage == 0){
+            TextFields.bindAutoCompletion(this.commandline, Arrays.asList( "open(\"", "$(\"" ) );
+            //this.commandline.set
+            
+        }
     }
     
     private void addListContextMenu(){
@@ -86,6 +106,7 @@ public class SeleniumConsoleController implements Initializable  {
 
     @FXML
     public void readCommand(KeyEvent event) {
+       // this.setupAutoComplete();
         if (event.getCode() == KeyCode.ENTER) {
             String currentCommand = this.commandline.getText();
             this.commandline.clear();

@@ -35,4 +35,8 @@ public class SelenideLogger {
         this.instance.logOutput.appendText("\n[INFO] " + logMessage);
     }
     
+    public void error(String logMessage){
+        this.instance.logOutput.appendText("\n[ERROR] " + logMessage);
+    }
+    
 }
