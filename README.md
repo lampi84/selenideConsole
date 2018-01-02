@@ -1,7 +1,7 @@
 # selenideConsole
 A console for trying out selenide commands
 
-###Possible command which could be entered are:
+### Possible command which could be entered are:
 
     open("http://www.google.com")
 Open the given url
@@ -11,7 +11,7 @@ Open the given url
 Select a element for one of the following functions
 
 
-####Actions on an element (appended with dot)
+#### Actions on an element (appended with dot)
 
     .click() 
 Performs a click on the selected element
