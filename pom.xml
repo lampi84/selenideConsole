@@ -43,10 +43,34 @@
 
                 </configuration>
             </plugin>
+            
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>de.palamb.testing.MainApp</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
 
         </plugins>
     </build>
-
 
     <dependencies>
     
@@ -57,15 +81,7 @@
             <artifactId>miglayout-javafx</artifactId>
             <version>5.0</version>
         </dependency>
-
-        <!-- Apache Commons -->
-
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
-        </dependency>
-
+        
         <!-- Logging  -->
 
         <dependency>
@@ -89,17 +105,17 @@
             <version>${log4j.version}</version>
         </dependency>
 
+        <!-- Apache Commons -->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+
         <dependency>
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
             <version>4.9</version>
-        </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver -->
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-chrome-driver</artifactId>
-            <version>3.8.1</version>
         </dependency>
         
         <!-- https://mvnrepository.com/artifact/org.controlsfx/controlsfx -->
@@ -108,8 +124,7 @@
             <artifactId>controlsfx</artifactId>
             <version>9.0.0</version>
         </dependency>
-
-
+        
     </dependencies>
 
 </project>
