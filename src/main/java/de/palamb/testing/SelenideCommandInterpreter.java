@@ -69,6 +69,9 @@ public class SelenideCommandInterpreter {
         if(func.equals("$")) element = CommandExecuter.$(parameter);
         if(func.equals("click")) CommandExecuter.click(prevElement);
         if(func.equals("shouldHave")) CommandExecuter.shouldHave(prevElement, parameter);
+        if(func.equals("text")) CommandExecuter.text(prevElement);
+        if(func.equals("mark")) CommandExecuter.mark(prevElement);
+        if(func.equals("setValue")) CommandExecuter.setValue(prevElement, parameter);
         
         return element;        
     }

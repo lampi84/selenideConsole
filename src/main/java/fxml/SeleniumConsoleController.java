@@ -10,10 +10,9 @@ import de.palamb.testing.SelenideLogger;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ContextMenu;
@@ -27,7 +26,6 @@ import javafx.scene.input.ClipboardContent;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import org.apache.commons.lang.StringUtils;
 import org.controlsfx.control.textfield.TextFields;
 
 public class SeleniumConsoleController implements Initializable  {
@@ -120,5 +118,12 @@ public class SeleniumConsoleController implements Initializable  {
     private void addCommandToLog(String command){
         this.recordedCommands.add(command);
     }
+
     
+    
+    @FXML
+    private void closeApp(ActionEvent evt){
+        SelenideCommandInterpreter.getInstance().close();
+        System.exit(0);
+    }
 }

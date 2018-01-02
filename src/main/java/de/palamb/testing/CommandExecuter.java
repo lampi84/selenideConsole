@@ -10,6 +10,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -60,9 +61,30 @@ public class CommandExecuter {
         }        
     }
 
-    static void click(WebElement element) {
+    public static void click(WebElement element) {
         element.click();
     }
+    
+    public static void text(WebElement element) {
+        SelenideElement selenideElement = (SelenideElement) element;
+        log.info("Text of Element: " + selenideElement.text());
+    }
+    
+    public static void mark(WebElement element) {
+        log.info("Marking element in purple");
+        
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].setAttribute('style', 'background-color:purple')",element);
+    }
+    
+    
+    public static void setValue(WebElement element, String text) {
+        SelenideElement selenideElement = (SelenideElement) element;
+        selenideElement.setValue(text);
+        log.info("Set element value to: " + text);
+    }
+    
+    
     
     
     

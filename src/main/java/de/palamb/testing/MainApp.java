@@ -20,7 +20,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        log.info("Starting Hello JavaFX and Maven demonstration application");
+        log.info("Starting SelenideConsole and chrome webdriver");
         
         this.interpreter = SelenideCommandInterpreter.getInstance();
 
