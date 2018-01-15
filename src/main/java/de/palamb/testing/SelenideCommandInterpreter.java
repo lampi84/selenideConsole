@@ -21,15 +21,9 @@ public class SelenideCommandInterpreter {
 
     private SelenideCommandInterpreter() {
         
-       try {
-            System.setProperty("webdriver.chrome.driver", "\\webdriver\\chromedriver.exe");
-            this.driver = new ChromeDriver();
-            WebDriverRunner.setWebDriver(this.driver);
-        } catch (Exception e) {
-            System.out.println(e.getCause());
-        }
-        
-
+        System.setProperty("webdriver.chrome.driver", "\\webdriver\\chromedriver.exe");
+        this.driver = new ChromeDriver();
+        WebDriverRunner.setWebDriver(this.driver);
     }
 
     public static SelenideCommandInterpreter getInstance() {
