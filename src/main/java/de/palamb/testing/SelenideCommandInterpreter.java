@@ -21,6 +21,8 @@ public class SelenideCommandInterpreter {
 
     private SelenideCommandInterpreter() {
         
+        // System.out.println(this.getClass().getResource("resources/webdriver"));
+        
         System.setProperty("webdriver.chrome.driver", "\\webdriver\\chromedriver.exe");
         this.driver = new ChromeDriver();
         WebDriverRunner.setWebDriver(this.driver);

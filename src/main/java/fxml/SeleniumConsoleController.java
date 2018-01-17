@@ -42,6 +42,8 @@ public class SeleniumConsoleController implements Initializable  {
     
     private SelenideLogger log;
     
+    private Clipboard systemClipboard;
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.recordedCommands = FXCollections.observableArrayList(); 
@@ -51,6 +53,7 @@ public class SeleniumConsoleController implements Initializable  {
         this.outputLog.setText("Selenide console started");
         this.log.setLogArea(outputLog);
         this.commandline.setText("");
+        this.systemClipboard = Clipboard.getSystemClipboard();
     }
     
     // TODO not working yet
@@ -75,10 +78,10 @@ public class SeleniumConsoleController implements Initializable  {
             MenuItem copyToClipboard = new MenuItem("Copy to clipboard");
             copyToClipboard.setOnAction(event -> {
                 
-                final Clipboard clipboard = Clipboard.getSystemClipboard();
+                
                 final ClipboardContent content = new ClipboardContent();
                 content.putString(cell.getText());
-                clipboard.setContent(content);
+                this.systemClipboard.setContent(content);
             });
             
             MenuItem deleteCommand = new MenuItem("Delete Command");
@@ -118,7 +121,51 @@ public class SeleniumConsoleController implements Initializable  {
     private void addCommandToLog(String command){
         this.recordedCommands.add(command);
     }
+    
+    private String getSelectorFromClipboard(){
+        return this.systemClipboard.getString();
+    }
 
+    @FXML
+    private void setCommand$(){
+        setCommand("$(\"@selector@\").");
+    }
+    
+    @FXML
+    private void setCommandClick(){
+        setCommand("$(\"@selector@\").click()");
+    }
+    
+    @FXML
+    private void setCommandMark(){
+        setCommand("$(\"@selector@\").mark()");
+    }
+    
+    @FXML
+    private void setCommandOpen(){
+        setCommand("open(\"https://\")");
+    }
+    
+    @FXML
+    private void setCommandText(){
+        setCommand("$(\"@selector@\").text()");
+    } 
+    
+    @FXML
+    private void setCommandsetValue(){
+        setCommand("$(\"@selector@\").setValue(\"\")");
+    } 
+
+    @FXML
+    private void setCommandShouldHave(){
+        setCommand("$(\"@selector@\").shouldHave(\"\")");
+    } 
+    
+    private void setCommand(String command) {
+        String selector = this.getSelectorFromClipboard();
+        String finalCommand = command.replace("@selector@", selector);
+        this.commandline.setText(finalCommand);
+    }
     
     
     @FXML

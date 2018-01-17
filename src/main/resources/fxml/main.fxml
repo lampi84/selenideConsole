@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.control.Button?>
@@ -7,9 +8,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.GridPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.SeleniumConsoleController">
+<AnchorPane prefHeight="398.0" prefWidth="572.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.SeleniumConsoleController">
    <children>
-      <VBox alignment="CENTER" layoutX="265.0" layoutY="77.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="398.0" prefWidth="572.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <MenuBar>
               <menus>
@@ -20,9 +21,55 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <ListView fx:id="list_recordedCommands" />
-            <TextField fx:id="commandline" onKeyPressed="#readCommand" />
-            <TextArea fx:id="outputLog" prefHeight="200.0" prefWidth="200.0" />
+            <HBox prefHeight="265.0" prefWidth="572.0">
+               <children>
+                  <VBox HBox.hgrow="ALWAYS">
+                     <children>
+                        <ListView fx:id="list_recordedCommands" prefHeight="236.0" prefWidth="461.0" />
+                        <TextField fx:id="commandline" onKeyPressed="#readCommand" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" spacing="5.0">
+                     <children>
+                        <Button minWidth="100.0" mnemonicParsing="false" onAction="#setCommand$" text="\$" textAlignment="CENTER">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Button>
+                        <Button layoutX="17.0" layoutY="10.0" minWidth="100.0" mnemonicParsing="false" onAction="#setCommandClick" text="click" textAlignment="CENTER">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Button>
+                        <Button layoutX="17.0" layoutY="35.0" minWidth="100.0" mnemonicParsing="false" onAction="#setCommandMark" text="mark" textAlignment="CENTER">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Button>
+                        <Button layoutX="17.0" layoutY="60.0" minWidth="100.0" mnemonicParsing="false" onAction="#setCommandOpen" text="open" textAlignment="CENTER">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Button>
+                        <Button layoutX="17.0" layoutY="85.0" minWidth="100.0" mnemonicParsing="false" onAction="#setCommandText" text="text" textAlignment="CENTER">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Button>
+                        <Button layoutX="17.0" layoutY="110.0" minWidth="100.0" mnemonicParsing="false" text="shouldHave" textAlignment="CENTER">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Button>
+                        <Button layoutX="17.0" layoutY="135.0" minWidth="100.0" mnemonicParsing="false" onAction="#setCommandsetValue" text="setValue" textAlignment="CENTER" />
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+            <TextArea fx:id="outputLog" VBox.vgrow="ALWAYS" />
          </children>
       </VBox>
    </children>
