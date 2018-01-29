@@ -1,6 +1,12 @@
 # selenideConsole
 A console for trying out selenide commands
 
+## Getting started ###
+- Download the latest release jar from this SelenideCode project.
+- Download the chromedriver.exe and place them bot in the same folder.
+- Start the jar file with double click
+- Have fun 
+
 ### Possible command which could be entered are:
 
     open("http://www.google.com")

@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -26,12 +27,19 @@ import javafx.scene.input.ClipboardContent;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
 
 public class SeleniumConsoleController implements Initializable  {
 
     @FXML
     private TextField commandline;
+    
+    @FXML 
+    private AnchorPane ap;
     
     @FXML
     private TextArea outputLog;
@@ -172,5 +180,19 @@ public class SeleniumConsoleController implements Initializable  {
     private void closeApp(ActionEvent evt){
         SelenideCommandInterpreter.getInstance().close();
         System.exit(0);
+    }
+    
+    @FXML
+    private void showCode(){
+        final Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        Stage primaryStage = (Stage) ap.getScene().getWindow();
+        dialog.initOwner(primaryStage);
+        VBox dialogVbox = new VBox(20);
+        String generatedCode = SelenideCommandInterpreter.generateCode(recordedCommands);
+        dialogVbox.getChildren().add(new TextArea(generatedCode));
+        Scene dialogScene = new Scene(dialogVbox, 300, 200);
+        dialog.setScene(dialogScene);
+        dialog.show();
     }
 }

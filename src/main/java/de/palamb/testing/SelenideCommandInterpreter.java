@@ -6,6 +6,8 @@
 package de.palamb.testing;
 
 import com.codeborne.selenide.WebDriverRunner;
+import java.util.List;
+import javafx.stage.Stage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -18,12 +20,16 @@ public class SelenideCommandInterpreter {
     
     private static SelenideCommandInterpreter instance;
     private WebDriver driver;
+    public Stage primaryStage;
 
     private SelenideCommandInterpreter() {
         
         // System.out.println(this.getClass().getResource("resources/webdriver"));
         
-        System.setProperty("webdriver.chrome.driver", "\\webdriver\\chromedriver.exe");
+        java.io.File file = new java.io.File("");
+        String chromeDriverPath = file.getAbsolutePath() + "\\chromedriver.exe";
+        System.out.println(chromeDriverPath);
+	System.setProperty("webdriver.chrome.driver", chromeDriverPath);
         this.driver = new ChromeDriver();
         WebDriverRunner.setWebDriver(this.driver);
     }
@@ -76,5 +82,35 @@ public class SelenideCommandInterpreter {
         this.driver.close();
     }
     
+    public static String generateCode(List<String> commands){
+        StringBuilder generatedCode = new StringBuilder();
+        
+        for (String command : commands) {
+            if(isRealCommand(command)){
+               generatedCode.append(translateCode(command)).append(";\n");
+            }
+        }
+
+        return generatedCode.toString();        
+    }
+    
+    private static boolean isRealCommand(String command){
+        String[] unrealCommands = {".mark(",".text("};
+        boolean isRealCommand = true;
+        
+        for (String unrealCommand : unrealCommands) {
+            if(command.contains(unrealCommand)) isRealCommand = false;
+        }
+        return isRealCommand;
+    }
+    
+    private static String translateCode(String command){
+        String[] selenideCommands = {".open(",".click(",".setValue(","shouldHave("};
+        String translatedCommand = command;
+        for (String selenideCommand : selenideCommands) {
+            if(command.contains(selenideCommand)) translatedCommand = command;
+        }
+        return translatedCommand;
+    }
     
 }
